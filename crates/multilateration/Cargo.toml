@@ -1,0 +1,19 @@
+[package]
+name = "multilateration"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+mathru = "0.10"
+strum = "0.26"
+strum_macros = "0.26"
+
+[dev-dependencies]
+calamine = "0.26.1"
+serde = { version = "1.0.214", features = ["derive"] }
+rust_xlsxwriter = "0.79.1"
+
+[[example]]
+name = "mlat"
+path = "examples/mlat.rs"

@@ -1,0 +1,113 @@
+[package]
+name = "timestore"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+clap = { version = "4.5.16", features = ["derive"] }
+
+arrow = "52.2.0"
+arrow-array = "52.2.0"
+arrow-data = "52.2.0"
+arrow-ipc = "52.2.0"
+arrow-ord = "52.2.0"
+arrow-schema = "52.2.0"
+arrow-arith = "52.2.0"
+arrow-cast = "52.2.0"
+
+lance = { version = "0.19.2" }
+lancedb = { version = "0.13.0", features = ["polars"] }
+polars-arrow = { path = "./crates/polars/crates/polars-arrow", features = [
+    "arrow_rs",
+] }
+polars = { path = "./crates/polars/crates/polars", features = [
+    "lazy",
+    "ndarray",
+    "dtype-struct",
+] }
+
+linfa-clustering = { version = "0.7.0", features = ["default"] }
+linfa = { version = "0.7.0", features = ["default"] }
+linfa-nn = "0.7.0"
+ndarray = "0.15.6"                                               # this must match linfa's ndarray version!
+
+multilateration = { path = "./crates/multilateration" }
+
+axum = "0.7"
+axum-streams = { path = "./crates/axum-streams", features = [
+    "json",
+    "csv",
+    "protobuf",
+    "arrow",
+] }
+reqwest-streams = { path = "./crates/reqwest-streams", features = [
+    "json",
+    "csv",
+    "protobuf",
+    "arrow",
+] }
+tower = { version = "0.5", default-features = false, features = [
+    "util",
+    "make",
+] }
+tower-http = { version = "0.6", features = [
+    "util",
+    "map-response-body",
+    "cors",
+    "trace",
+    "fs",
+] }
+tower-layer = "0.3"
+tower-service = "0.3"
+
+async-nats = "0.37.0"
+tokio = { version = "1.41.1", features = ["full"] }
+futures = { version = "0.3.28", default-features = false, features = [
+    "std",
+    "async-await",
+] }
+flume = { version = "0.11.1", default-features = false, features = [
+    "async",
+    "select",
+] }
+threadpool = { version = "1.8.1" }
+itertools = "0.14.0"
+
+tracing-subscriber = { version = "0.3.18" }
+tracing = "0.1.40"
+
+serde = { version = "^1", features = ["derive"] }
+serde_json = { version = "^1", features = ["raw_value"] }
+
+strum = "0.26"
+strum_macros = "0.26"
+
+chrono = { version = "0.4.35", features = ["serde"] }
+
+anyhow = "1.0.93"
+dotenv = "0.15.0"
+
+tile-grid = "0.6.2"
+wkb = "0.7.1"
+wkt = "0.11.1"
+geo-types = "0.7.14"
+geo = "0.28.0"
+
+nanorand = "0.7.0"
+
+[dev-dependencies]
+jiff = { version = "0.1.14", features = ["serde"] }
+rand = "0.8.5"
+uuid = { version = "1.11.0", features = [
+    "v4",                # Lets you generate random UUIDs
+    "fast-rng",          # Use a faster (but still sufficiently random) RNG
+    "macro-diagnostics", # Enable better diagnostics for compile-time UUIDs
+] }
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

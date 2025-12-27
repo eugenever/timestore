@@ -1,0 +1,35 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8000
+  },
+  "nats": {
+    "enabled": true,
+    "url": "nats://localhost:4222",
+    "subject": "measurements",
+    "queue": "queue.measurements",
+    "subscription_capacity": 655360
+  },
+  "lancedb": {
+    "timeout_pull": 30,
+    "batch_size": 5000,
+    "store_path": "{cwd}/store",
+    "table_partition_prefix": "partition",
+    "datasets": ["points", "measurements", "stations"],
+    "standarts": ["GSM", "WCDMA", "LTE", "5GNR"],
+    "max_rows_per_file": 1500000,
+    "max_rows_per_file_measurement_bs": 150000,
+    "optimize_table": false
+  },
+  "mlat": {
+    "number_threads": 8,
+    "decimals": 20,
+    "distance_deviation_threshold": 0.1,
+    "max_height": 50,
+    "number_iterations": 70,
+    "number_iterations_light": 30,
+    "optimize_number_measurements_up_to": 10,
+    "light_optimization": true
+  },
+  "log_level": "ERROR"
+}
